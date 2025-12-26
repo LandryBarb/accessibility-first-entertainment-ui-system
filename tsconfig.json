@@ -1,0 +1,15 @@
+{
+  "ignoreDeprecations": "6.0",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "jsx": "preserve",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["vitest/globals"],
+    "skipLibCheck": true,
+  }
+}
