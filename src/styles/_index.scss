@@ -1,0 +1,22 @@
+/* ==========================================================================
+   PUBLIC STYLE ENTRY
+   Accessibility-First Entertainment UI System
+   ========================================================================== */
+
+/* Tokens (CSS variables) */
+@forward "./tokens";
+
+/* Core browser safety */
+@forward "./core";
+
+/* Global foundations */
+@forward "./foundations";
+
+/* Utilities (mixins only) */
+@forward "./utilities";
+
+/* Components (CSS output) */
+@forward "./components";
+
+/* Themes (optional, future-safe) */
+@forward "./themes";

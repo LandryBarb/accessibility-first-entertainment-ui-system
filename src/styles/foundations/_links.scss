@@ -1,0 +1,15 @@
+/* Calm, consistent link style (accessible, not loud) */
+a {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-text-primary) 40%, transparent);
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  text-decoration-color: color-mix(in srgb, var(--color-text-primary) 65%, transparent);
+}
+a:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
+}

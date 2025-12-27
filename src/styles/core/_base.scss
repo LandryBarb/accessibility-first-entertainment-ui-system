@@ -1,0 +1,12 @@
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg-root);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-base);
+  text-rendering: optimizeLegibility;
+}
