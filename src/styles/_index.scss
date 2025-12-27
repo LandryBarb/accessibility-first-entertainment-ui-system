@@ -6,6 +6,9 @@
 /* Tokens (CSS variables) */
 @forward "./tokens";
 
+/* Layout system */
+@forward "./layout";
+
 /* Core browser safety */
 @forward "./core";
 
