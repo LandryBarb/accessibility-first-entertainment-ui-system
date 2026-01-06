@@ -12,6 +12,12 @@ const routes: RouteRecordRaw[] = [
     meta: { view: "system" },
   },
   {
+    path: "/system/components/tabs",
+    name: "system-tabs",
+    component: () => import("@/pages/system/TabsPage.vue"),
+    meta: { view: "system" },
+  },
+  {
     path: "/mockup/content/:id?",
     name: "mockup-content-detail",
     component: () => import("@/pages/mockup/ContentDetailPage.vue"),
