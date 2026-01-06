@@ -1,7 +1,10 @@
 :root{
     
   /* ===== Z-index scale ===== */
+  --z-background: 0;
+  --z-content: 10;
   --z-dropdown: 20;
   --z-toast: 40;
+  --z-overlay: 50;
   --z-modal: 60;
 }
