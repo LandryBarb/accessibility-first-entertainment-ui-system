@@ -4,8 +4,10 @@ import MockupLayout from "@/components/layout/MockupLayout.vue";
 import ContentDetailLayout from "@/components/layout/ContentDetailLayout.vue";
 import BaseButton from "@/components/atoms/BaseButton.vue";
 import MovieCard from "@/components/patterns/MovieCard.vue";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/molecules/Tabs";
 
-// Mock Data (Stagecraft UI)
+// --- Mock Data ---
+
 const HERO_MOVIE = {
   title: "ECLIPSE OF THE VOID",
   description: "In a future where starlight is the only currency, a rogue pilot discovers a constellation that shouldn't exist. As factions war for control of the sky, she must decide if the truth is worth extinguishing the only light humanity has left.",
@@ -15,7 +17,6 @@ const HERO_MOVIE = {
   duration: "2h 14m",
   tags: ["4K Ultra HD", "Dolby Atmos"],
   cast: "Elena Vance, Marcus Thorne, Unit 734",
-  // Unsplash image from original design
   image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2994&auto=format&fit=crop"
 };
 
@@ -37,7 +38,6 @@ const RELATED_MOVIES = [
 // --- State ---
 
 const isMuted = ref(true);
-const activeTab = ref("related");
 </script>
 
 <template>
@@ -91,7 +91,7 @@ const activeTab = ref("related");
           :aria-label="isMuted ? 'Unmute' : 'Mute'"
         >
           <span v-if="isMuted">🔇</span>
-          <span v-else>wv</span>
+          <span v-else>🔊</span>
         </button>
         <div class="maturity-rating">
           {{ HERO_MOVIE.rating }}
@@ -100,51 +100,35 @@ const activeTab = ref("related");
 
       <div class="content-rows">
         
-        <div class="tabs-container">
-          <div class="tabs-list" role="tablist">
-            <button 
-              class="tab" 
-              :class="{ active: activeTab === 'related' }"
-              role="tab"
-              :aria-selected="activeTab === 'related'"
-              @click="activeTab = 'related'"
-            >
-              More Like This
-            </button>
-            <button 
-              class="tab" 
-              :class="{ active: activeTab === 'details' }"
-              role="tab"
-              :aria-selected="activeTab === 'details'"
-              @click="activeTab = 'details'"
-            >
-              Details
-            </button>
-            <button 
-              class="tab" 
-              :class="{ active: activeTab === 'trailers' }"
-              role="tab"
-              :aria-selected="activeTab === 'trailers'"
-              @click="activeTab = 'trailers'"
-            >
-              Trailers
-            </button>
-          </div>
-        </div>
+        <Tabs defaultValue="related" variant="line" class="content-tabs">
+          <TabsList>
+            <TabsTrigger value="related">More Like This</TabsTrigger>
+            <TabsTrigger value="details">Details</TabsTrigger>
+            <TabsTrigger value="trailers">Trailers</TabsTrigger>
+          </TabsList>
 
-        <section v-if="activeTab === 'related'" class="tab-panel" role="tabpanel">
-          <div class="card-grid">
-            <MovieCard 
-              v-for="movie in RELATED_MOVIES" 
-              :key="movie.id" 
-              :movie="movie" 
-            />
-          </div>
-        </section>
+          <TabsContent value="related">
+            <div class="card-grid">
+              <MovieCard 
+                v-for="movie in RELATED_MOVIES" 
+                :key="movie.id" 
+                :movie="movie" 
+              />
+            </div>
+          </TabsContent>
 
-        <section v-if="activeTab === 'details'" class="tab-panel" role="tabpanel">
-          <div class="details-placeholder">Details Content Placeholder</div>
-        </section>
+          <TabsContent value="details">
+            <div class="details-placeholder">
+              <h3>Title Details</h3>
+              <p>Director: Sofia Kovic</p>
+              <p>Genres: Sci-Fi, Thriller, Drama</p>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="trailers">
+            <div class="details-placeholder">Trailers Placeholder</div>
+          </TabsContent>
+        </Tabs>
 
         <section class="carousel-section">
           <h3 class="section-title">Trending Now</h3>
@@ -166,6 +150,27 @@ const activeTab = ref("related");
 <style scoped lang="scss">
 @use "@/styles" as *;
 
+/* Note: Most component-specific styles are now inside Tabs/*.vue */
+
+/* Page-specific overrides for layout rhythm */
+.content-tabs {
+  margin-bottom: var(--space-6);
+}
+
+.details-placeholder {
+  padding: var(--space-6);
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-subtle);
+  
+  h3 {
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2);
+  }
+}
+
+/* --- Hero Styles (Preserved) --- */
 .hero-content {
   display: flex;
   flex-direction: column;
@@ -183,7 +188,7 @@ const activeTab = ref("related");
   line-height: 1;
   
   @media (min-width: 48rem) {
-    font-size: 4rem; /* Specific cinematic size */
+    font-size: 4rem;
   }
 }
 
@@ -214,7 +219,7 @@ const activeTab = ref("related");
 }
 
 .tech-badge {
-  background-color: rgba(255, 255, 255, 0.1); // Translucent
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 2px 6px;
   border-radius: var(--radius-sm);
   font-size: var(--font-size-xs);
@@ -240,6 +245,10 @@ const activeTab = ref("related");
   min-width: 140px;
 }
 
+.icon {
+  margin-right: var(--space-2);
+}
+
 .hero-cast {
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
@@ -260,6 +269,7 @@ const activeTab = ref("related");
   backdrop-filter: blur(4px);
   display: grid;
   place-items: center;
+  cursor: pointer;
   
   &:hover {
     background: rgba(255,255,255,0.1);
@@ -276,47 +286,7 @@ const activeTab = ref("related");
   text-transform: uppercase;
 }
 
-/* --- Content Body --- */
-.tabs-container {
-  margin-bottom: var(--space-6);
-  border-bottom: 1px solid var(--color-border-subtle);
-}
-
-.tabs-list {
-  display: flex;
-  gap: var(--space-6);
-}
-
-.tab {
-  padding-bottom: var(--space-3);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-muted);
-  border-bottom: 3px solid transparent;
-  text-transform: uppercase;
-  transition: color var(--motion-fast), border-color var(--motion-fast);
-  
-  &:hover {
-    color: var(--color-text-primary);
-  }
-
-  &.active {
-    color: var(--color-text-primary);
-    border-color: var(--color-accent-primary);
-  }
-}
-
-.tab-panel {
-  animation: fade-in var(--motion-base);
-}
-
-.details-placeholder {
-  padding: var(--space-6);
-  background: var(--color-bg-elevated);
-  border-radius: var(--radius-md);
-  color: var(--color-text-muted);
-}
-
+/* --- Page Layout --- */
 .carousel-section {
   margin-top: var(--space-7);
 }
@@ -338,10 +308,5 @@ const activeTab = ref("related");
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 </style>
