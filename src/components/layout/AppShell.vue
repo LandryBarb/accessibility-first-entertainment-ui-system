@@ -1,23 +1,21 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import SkipLink from "@/components/organisms/SkipLink.vue";
 
 const router = useRouter();
+const route = useRoute();
 
-const currentView = computed<"system" | "mockup">(() => {
-  return (router.currentRoute.value?.meta?.view as
-    | "system"
-    | "mockup") ?? "system";
-});
+// Type-safe access to meta.view (augmented in env.d.ts)
+// Defaults to 'system' if undefined (e.g. 404 pages)
+const currentView = computed(() => route.meta.view ?? "system");
 
 const isSystem = () => currentView.value === "system";
 const isMockup = () => currentView.value === "mockup";
 </script>
 
-
 <template>
- <SkipLink />
+  <SkipLink />
 
   <div class="layout-app">
     <header class="layout-header" role="banner">
@@ -30,13 +28,13 @@ const isMockup = () => currentView.value === "mockup";
         <nav class="view-switcher" aria-label="View Mode">
           <button
             :class="{ active: isSystem() }"
-            @click="router.push('/system')"
+            @click="router.push('/system/components/button')"
           >
             System
           </button>
           <button
             :class="{ active: isMockup() }"
-            @click="router.push('/mockup')"
+            @click="router.push('/mockup/content/hero-1')"
           >
             Mockup
           </button>
@@ -100,11 +98,32 @@ const isMockup = () => currentView.value === "mockup";
     color: var(--color-text-muted);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: color var(--motion-fast), background-color var(--motion-fast);
 
     &.active {
       background-color: var(--color-accent-primary);
       color: var(--color-text-primary);
     }
+
+    &:hover:not(.active) {
+      color: var(--color-text-primary);
+    }
   }
+}
+
+.meta-info {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* === Layout Fix === */
+.layout-main {
+  padding-top: var(--layout-header-height);
+  display: flex;
+  flex-direction: column; /* Key Fix: Forces children to stretch to full width */
+  flex: 1;
+  min-height: 0;
+  width: 100%; /* Explicit width ensures full coverage */
 }
 </style>

@@ -55,6 +55,8 @@
   border-right: 1px solid var(--color-border-subtle);
 
   overflow-y: auto;
+  /* Ensure stacking context above content but below header overlays */
+  z-index: var(--z-content); 
 }
 
 /* Sidebar header (branding / context) */
@@ -73,12 +75,15 @@
 
 /* Main content */
 .layout-system__main {
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   padding-block: var(--space-6);
+  min-width: 0; /* Prevent grid blowout */
 }
 
 /* Content width governance */
 .layout-system__container {
+  width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
   padding-inline: var(--space-6);
@@ -99,6 +104,7 @@
     height: auto;
     border-right: none;
     border-bottom: 1px solid var(--color-border-subtle);
+    max-height: 30vh; /* Cap height on mobile so it doesn't push content too far */
   }
 }
 </style>
