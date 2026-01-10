@@ -30,6 +30,11 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
             </RouterLink>
           </li>
           <li><a href="#" class="nav-item">Inputs</a></li>
+          <li>
+            <RouterLink to="/system/components/tabs" class="nav-item">
+              Tabs
+            </RouterLink>
+          </li>
           <li><a href="#" class="nav-item">Modals</a></li>
           <li><a href="#" class="nav-item">Toasts</a></li>
         </ul>

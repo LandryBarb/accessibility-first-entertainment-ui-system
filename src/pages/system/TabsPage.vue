@@ -36,6 +36,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/molecules
             </RouterLink>
           </li>
           <li><a href="#" class="nav-item">Modals</a></li>
+          <li><a href="#" class="nav-item">Toasts</a></li>
         </ul>
       </div>
     </template>
