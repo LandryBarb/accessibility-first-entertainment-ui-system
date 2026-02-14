@@ -87,7 +87,7 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+// @use "@/styles" as *;
 
 /* Branding Context (Sidebar) */
 .brand-context {

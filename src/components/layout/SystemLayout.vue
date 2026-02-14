@@ -33,7 +33,7 @@
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+
 
 /* ==========================================================================
    SYSTEM LAYOUT

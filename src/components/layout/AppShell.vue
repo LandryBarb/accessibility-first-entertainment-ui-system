@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import SkipLink from "@/components/organisms/SkipLink.vue";
+// import SkipLink from "@/components/organisms/SkipLink.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -15,7 +15,7 @@ const isMockup = () => currentView.value === "mockup";
 </script>
 
 <template>
-  <SkipLink />
+  
 
   <div class="layout-app">
     <header class="layout-header" role="banner">
@@ -51,7 +51,7 @@ const isMockup = () => currentView.value === "mockup";
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+
 
 .header-content {
   display: flex;

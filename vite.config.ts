@@ -9,8 +9,20 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-
-
+   css:{
+    preprocessorOptions:{
+      scss:{
+        // Auto-import your settings and tools into every Vue component
+        additionalData:
+        `
+        @use "sass:map";
+        @use "sass:math";
+        @use "@/styles/settings" as *;
+        @use "@/styles/tools" as *;
+        `
+      }
+    }
+  },
   test: {
     environment: 'jsdom',
  // ✅ Only run OUR tests

@@ -1,0 +1,14 @@
+:root {
+  /* Structural dimensions */
+  --layout-header-height: 4rem;        /* 64px */
+  --layout-sidebar-width: 16.25rem;    /* 260px */
+  --layout-sidebar-collapsed: 4rem;    /* 64px */
+  --layout-content-max: 87.5rem;       /* 1400px */
+
+  /* Layout z-index (mapped to the global scale we brought over) */
+  --layout-z-background: var(--z-background, 0);
+  --layout-z-content: var(--z-content, 10);
+  --layout-z-sticky: var(--z-dropdown, 20); /* Alias to dropdown or create a specific sticky token */
+  --layout-z-overlay: var(--z-overlay, 50);
+  --layout-z-modal: var(--z-modal, 60);
+}
