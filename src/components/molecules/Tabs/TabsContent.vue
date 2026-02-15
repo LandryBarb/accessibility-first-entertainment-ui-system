@@ -22,15 +22,15 @@ const isActive = computed(() => context.activeValue.value === props.value);
 
 <style scoped lang="scss">
 
-
 .ui-tabs__content {
-  animation: fade-in var(--motion-base);
+  /* Replaced generic motion token with cinematic bezier curve */
+  animation: fade-in 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
   outline: none;
   
   &:focus-visible {
-    outline: var(--focus-ring-width) solid var(--color-focus-ring);
-    outline-offset: var(--focus-ring-offset);
-    border-radius: var(--radius-sm);
+    outline: var(--focus-ring-width, 2px) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset, 2px);
+    border-radius: var(--radius-sm, 0.375rem);
   }
 }
 

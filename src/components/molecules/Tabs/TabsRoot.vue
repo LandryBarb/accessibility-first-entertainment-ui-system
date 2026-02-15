@@ -44,6 +44,7 @@ provide('tabs-context', {
 .ui-tabs {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  /* Translated: --space-4 -> md */
+  gap: map.get($space-scale, md);
 }
 </style>

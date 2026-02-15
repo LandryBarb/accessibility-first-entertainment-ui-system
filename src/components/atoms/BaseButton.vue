@@ -77,11 +77,18 @@ const isDisabled = computed(() => props.disabled || props.loading)
   }
 }
 .button--secondary {
-  background-color: var(--color-surface-soft);
+  background-color: var(--color-accent);
   color: var(--color-text-main);
 
   &:hover {
-    background-color: var(--color-surface-raised);
+    background-color: var(--color-accent-soft);
+  }
+}
+.button--destructive{
+  background-color: var(--color-state-danger);
+  color: var(--color-text-main);
+   &:hover {
+      background-color: var(--color-state-danger-soft);
   }
 }
 

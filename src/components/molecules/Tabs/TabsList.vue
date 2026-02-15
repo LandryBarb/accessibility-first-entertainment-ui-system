@@ -23,16 +23,19 @@ const context = inject('tabs-context') as any;
   
   /* Variant: Line (Netflix/Content style) */
   .ui-tabs--line & {
-    gap: var(--space-6);
+    /* Translated: --space-6 -> lg */
+    gap: map.get($space-scale, lg);
     border-bottom: 1px solid var(--color-border-subtle);
   }
 
   /* Variant: Pill (System/Settings style) */
   .ui-tabs--pill & {
-    gap: var(--space-1);
-    background-color: var(--color-stage-black-850);
-    padding: var(--space-1);
-    border-radius: var(--radius-md);
+    /* Translated: --space-1 -> xs */
+    gap: map.get($space-scale, xs);
+    /* Semantic color shift */
+    background-color: var(--color-surface-soft);
+    padding: map.get($space-scale, xs);
+    border-radius: var(--radius-md, 0.625rem);
     border: 1px solid var(--color-border-subtle);
     display: inline-flex;
   }

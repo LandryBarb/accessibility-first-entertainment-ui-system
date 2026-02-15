@@ -83,11 +83,12 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
 /* ❌ Removed: @use "@/styles" as *; */
 
 .movie-card {
-  display: flex;
+
   position: relative;
   flex: 0 0 auto;
   width: 100%;
   border-radius: var(--radius-sm, 0.375rem);
+ 
   background-color: var(--color-surface-raised);
   
   /* Converted custom motion tokens to explicit standard easing */
@@ -122,7 +123,7 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
     }
 
     .movie-card__overlay {
-      opacity: 0.8; /* Darkened slightly to make text pop more */
+      opacity: 1; /* Darkened slightly to make text pop more */
     }
   }
 
@@ -175,10 +176,16 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
 }
 
 .movie-card__title {
-  font-size: map.get($font-size-scale, 1);
+  font-size: map.get($font-size-scale, 0);
   font-weight: map.get($font-weight-scale, bold);
   color: var(--color-text-main);
   text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  /* ✅ TEXT CLAMP: Prevents long titles from blowing out the height */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .movie-card__meta {
@@ -203,20 +210,24 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
 
 .movie-card__actions {
   display: flex;
-  gap: map.get($space-scale, sm);
+  gap: map.get($space-scale, xs);
   margin-top: map.get($space-scale, xs);
 }
 
 /* Override button styles for the mini-card context */
 .mini-btn {
-  padding: map.get($space-scale, xs) !important;
-  min-height: 2rem !important;
-  min-width: 2rem !important;
-  border-radius: 50% !important;
+ /* Let it inherit the 44px WCAG tap-target from BaseButton */
+  padding: 0 !important; 
+  border-radius: var(--radius-pill) !important; /* Updated to use the pill token */
   font-size: map.get($font-size-scale, 0) !important;
   background-color: rgba(30, 30, 30, 0.8) !important;
   backdrop-filter: blur(4px);
   border: 1px solid var(--color-border-subtle) !important;
+
+  /* Force absolute centering for the icon inside the 44px circle */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 
   &:hover {
     border-color: var(--color-text-main) !important;

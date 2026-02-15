@@ -306,8 +306,15 @@ const isMuted = ref(true);
 /* Grid Layout */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* Mobile size: minimum 160px wide */
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: map.get($space-scale, md);
+
+  /* Desktop size: minimum 280px wide (Larger cards) */
+  @include mq('md') {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: map.get($space-scale, lg); /* Slightly larger gap to balance the big cards */
+  }
 }
 
 @keyframes fade-in-up {

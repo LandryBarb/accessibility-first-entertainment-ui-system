@@ -87,19 +87,17 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
 </template>
 
 <style scoped lang="scss">
-// @use "@/styles" as *;
-
 /* Branding Context (Sidebar) */
 .brand-context {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: map.get($space-scale, sm);
 }
 
 .brand-subtitle {
-  font-size: var(--font-size-sm);
+  font-size: map.get($font-size-scale, 0);
   color: var(--color-text-muted);
-  font-weight: var(--font-weight-medium);
+  font-weight: map.get($font-weight-scale, medium);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -108,44 +106,45 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
 .nav-group {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: map.get($space-scale, sm);
 }
 
 .nav-group__title {
-  font-size: var(--font-size-xs);
+  /* Using explicit 0.75rem for ultra-small UI text, or use step 0 if you prefer */
+  font-size: 0.75rem; 
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-weight: var(--font-weight-semibold);
-  padding-inline: var(--space-2);
+  font-weight: map.get($font-weight-scale, semibold);
+  padding-inline: map.get($space-scale, sm);
 }
 
 .nav-group__list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: map.get($space-scale, xs);
 }
 
 .nav-item {
   display: block;
-  padding: var(--space-2);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-secondary);
+  padding: map.get($space-scale, sm);
+  border-radius: var(--radius-sm, 0.375rem);
+  color: var(--color-text-muted);
   text-decoration: none;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  transition: background-color var(--motion-fast), color var(--motion-fast);
+  font-size: map.get($font-size-scale, 0);
+  font-weight: map.get($font-weight-scale, medium);
+  transition: background-color 150ms ease, color 150ms ease;
 
   &:hover {
-    color: var(--color-text-primary);
-    background-color: var(--color-stage-black-750);
+    color: var(--color-text-main);
+    background-color: var(--color-surface-raised);
   }
 
   /* Vue Router Active Class */
   &.router-link-active {
-    background-color: color-mix(in srgb, var(--color-accent-primary) 15%, transparent);
-    color: var(--color-accent-primary);
-    font-weight: var(--font-weight-semibold);
+    background-color: color-mix(in srgb, var(--color-brand-primary) 15%, transparent);
+    color: var(--color-brand-primary);
+    font-weight: map.get($font-weight-scale, semibold);
   }
 }
 
@@ -153,27 +152,28 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
 .system-page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-7);
-  padding-bottom: var(--space-7); /* Scroll padding */
+  gap: map.get($space-scale, xl);
+  padding-bottom: map.get($space-scale, xl); /* Scroll padding */
 }
 
 .system-page__header {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: map.get($space-scale, md);
 
   h1 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
+    font-size: map.get($font-size-scale, 4);
+    font-weight: map.get($font-weight-scale, semibold);
     letter-spacing: -0.02em;
+    color: var(--color-text-main);
   }
 }
 
 .system-page__description {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
+  font-size: map.get($font-size-scale, 2);
+  color: var(--color-text-muted);
   max-width: 65ch;
-  line-height: var(--line-height-loose);
+  line-height: map.get($line-height-scale, relaxed);
 }
 
 .system-page__divider {
@@ -186,30 +186,31 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
 .system-page__section {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: map.get($space-scale, md);
 
   h2 {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text-primary);
+    font-size: map.get($font-size-scale, 2);
+    font-weight: map.get($font-weight-scale, medium);
+    color: var(--color-text-main);
   }
 
   p {
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
     max-width: 60ch;
   }
 }
 
 /* Example Container */
 .example-surface {
-  background-color: var(--color-stage-black-850);
+  /* Replaced hardcoded hardware color with our new semantic tokens */
+  background-color: var(--color-surface-raised);
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
-  padding: var(--space-6);
+  border-radius: var(--radius-md, 0.625rem);
+  padding: map.get($space-scale, lg);
   
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-4);
+  gap: map.get($space-scale, md);
 }
 </style>
