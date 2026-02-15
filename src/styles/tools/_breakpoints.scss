@@ -1,4 +1,5 @@
 // src/scss/tools/_breakpoints.scss
+@use "sass:map";
 
 $breakpoints: (
   sm: 30em,

@@ -11,7 +11,7 @@
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+
 
 /* ==========================================================================
    MOCKUP LAYOUT
@@ -19,6 +19,6 @@
 
 .layout-mockup {
   min-height: 100%;
-  background-color: var(--color-bg-root);
+  background-color: var(--color-surface);
 }
 </style>

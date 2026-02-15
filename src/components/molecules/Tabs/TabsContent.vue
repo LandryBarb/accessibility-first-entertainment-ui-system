@@ -21,7 +21,7 @@ const isActive = computed(() => context.activeValue.value === props.value);
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+
 
 .ui-tabs__content {
   animation: fade-in var(--motion-base);

@@ -39,7 +39,7 @@ provide('tabs-context', {
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+
 
 .ui-tabs {
   display: flex;

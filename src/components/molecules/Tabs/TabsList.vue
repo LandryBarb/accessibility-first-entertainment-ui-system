@@ -15,7 +15,7 @@ const context = inject('tabs-context') as any;
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+
 
 .ui-tabs__list {
   display: flex;

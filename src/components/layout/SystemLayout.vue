@@ -41,27 +41,42 @@
 
 .layout-system {
   display: grid;
-  grid-template-columns: var(--layout-sidebar-width) 1fr;
+  grid-template-columns: 1fr;
   min-height: 100%;
+
+  /* Desktop: Sidebar + Content grid*/
+  @include mq('md');
+  grid-template-columns: var(--layout-sidebar-width, 16.25rem) 1fr;
 }
 
 /* Sidebar */
 .layout-system__sidebar {
-  position: sticky;
-  top: var(--layout-header-height);
-  height: calc(100vh - var(--layout-header-height));
-
-  background-color: var(--color-stage-black-800);
-  border-right: 1px solid var(--color-border-subtle);
+  /* Mobile-first */
+  position: static;
+  height: auto;
+  max-height: 30vh; /* Cap height on mobile so it doesn't push content too far */
+  
+  /* Mapped to Core semantic token for background */
+  background-color: var(--color-surface-soft);
+  border-bottom: 1px solid var(--color-border-subtle);
 
   overflow-y: auto;
-  /* Ensure stacking context above content but below header overlays */
-  z-index: var(--z-content); 
+  z-index: var(--z-content, 10); 
+
+  /* Desktop */
+  @include mq('md') {
+    position: sticky;
+    top: var(--layout-header-height, 4rem);
+    height: calc(100vh - var(--layout-header-height, 4rem));
+    border-bottom: none;
+    border-right: 1px solid var(--color-border-subtle);
+    max-height: none;
+  }
 }
 
 /* Sidebar header (branding / context) */
 .layout-system__sidebar-header {
-  padding: var(--space-5);
+  padding: map.get($space-scale, lg);
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
@@ -69,42 +84,34 @@
 .layout-system__nav {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-4);
+  gap: map.get($space-scale, md);
+  padding: map.get($space-scale, md);
 }
 
 /* Main content */
 .layout-system__main {
   display: flex;
   flex-direction: column;
-  padding-block: var(--space-6);
+  padding-block: map.get($space-scale, xl);
   min-width: 0; /* Prevent grid blowout */
 }
 
 /* Content width governance */
 .layout-system__container {
   width: 100%;
-  max-width: var(--container-max);
+  max-width: var(--layout-content-max, 87.5rem);
   margin-inline: auto;
-  padding-inline: var(--space-6);
+
+  /* Fluid mobile padding */
+  padding-inline: map.get($space-scale, md);
+
+  /* Desktop padding */
+  @include mq('md') {
+    padding-inline: map.get($space-scale, xl);
+  }
 
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
-}
-
-/* Responsive behavior */
-@media (max-width: 48rem) {
-  .layout-system {
-    grid-template-columns: 1fr;
-  }
-
-  .layout-system__sidebar {
-    position: static;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--color-border-subtle);
-    max-height: 30vh; /* Cap height on mobile so it doesn't push content too far */
-  }
+  gap: map.get($space-scale, xl);
 }
 </style>

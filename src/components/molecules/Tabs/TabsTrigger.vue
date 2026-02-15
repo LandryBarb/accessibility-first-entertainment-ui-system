@@ -31,7 +31,7 @@ const handleClick = () => {
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+
 
 .ui-tabs__trigger {
   cursor: pointer;

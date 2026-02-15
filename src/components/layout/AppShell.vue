@@ -63,63 +63,66 @@ const isMockup = () => currentView.value === "mockup";
 .brand {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: map.get($space-scale, sm);
 
   .brand-mark {
     inline-size: 1.5rem;
     block-size: 1.5rem;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-sm, 0.375rem);
     background: linear-gradient(
       to bottom right,
-      var(--color-spotlight-blue-500),
-      var(--color-spotlight-blue-700)
+      var(--color-brand-primary),
+      var(--color-brand-primary-soft)
     );
   }
 
   .brand-name {
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-sm);
+   font-weight: map.get($font-weight-scale, semibold);
+   font-size: map.get($font-size-scale, 1);
     letter-spacing: 0.08em;
   }
 }
 
 .view-switcher {
   display: flex;
-  gap: var(--space-1);
-  padding: var(--space-1);
+  gap: map.get($space-scale, xs);
+  padding: map.get($space-scale, xs);
   border-radius: 999px;
-  background-color: var(--color-cable-steel-700);
+  background-color: var(--color-surface-soft);
   border: 1px solid var(--color-border-subtle);
 
   button {
-    padding: var(--space-1) var(--space-4);
+    @include tap-target;
+    padding: map.get($space-scale, xs) map.get($space-scale, md);
     border-radius: 999px;
+    border:none;
     background: transparent;
     color: var(--color-text-muted);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
+    font-size: map.get($font-size-scale, 0);
+    font-weight:map.get($font-weight-scale, medium);
     cursor: pointer;
-    transition: color var(--motion-fast), background-color var(--motion-fast);
+transition: color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
 
     &.active {
-      background-color: var(--color-accent-primary);
-      color: var(--color-text-primary);
+      background-color: var(--color-surface-raised);
+      color: var(--color-text-main);
+      box-shadow: var(--shadow-elevation-low);
     }
 
     &:hover:not(.active) {
-      color: var(--color-text-primary);
+      color: var(--color-text-main);
     }
   }
 }
 
 .meta-info {
-  font-size: var(--font-size-xs);
+  font-size: map.get($font-size-scale, 0);
   color: var(--color-text-muted);
 }
 
 /* === Layout Fix === */
 .layout-main {
-  padding-top: var(--layout-header-height);
+  padding-top: var(--layout-header-height, 4rem);
   display: flex;
   flex-direction: column; /* Key Fix: Forces children to stretch to full width */
   flex: 1;

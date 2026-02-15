@@ -148,47 +148,46 @@ const isMuted = ref(true);
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
-
 /* Note: Most component-specific styles are now inside Tabs/*.vue */
 
 /* Page-specific overrides for layout rhythm */
 .content-tabs {
-  margin-bottom: var(--space-6);
+  margin-bottom: map.get($space-scale, xl);
 }
 
 .details-placeholder {
-  padding: var(--space-6);
-  background: var(--color-bg-elevated);
-  border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
+  padding: map.get($space-scale, lg);
+  background: var(--color-surface-raised);
+  border-radius: var(--radius-md, 0.625rem);
+  color: var(--color-text-muted);
   border: 1px solid var(--color-border-subtle);
   
   h3 {
-    color: var(--color-text-primary);
-    margin-bottom: var(--space-2);
+    color: var(--color-text-main);
+    margin-bottom: map.get($space-scale, xs);
   }
 }
 
-/* --- Hero Styles (Preserved) --- */
+/* --- Hero Styles --- */
 .hero-content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: map.get($space-scale, md);
   max-width: 60ch;
-  animation: fade-in-up var(--motion-slow) var(--easing-standard);
+  animation: fade-in-up 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 .hero-title {
-  font-size: var(--font-size-xl);
+  /* Fluid typography scaling */
+  font-size: map.get($font-size-scale, 4);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   line-height: 1;
   
-  @media (min-width: 48rem) {
-    font-size: 4rem;
+  @include mq('md') {
+    font-size: map.get($font-size-scale, 5);
   }
 }
 
@@ -196,113 +195,119 @@ const isMuted = ref(true);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-3);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
+  gap: map.get($space-scale, sm);
+  font-size: map.get($font-size-scale, 1);
+  font-weight: map.get($font-weight-scale, medium);
+  color: var(--color-text-muted);
 }
 
 .match-score {
-  color: var(--color-accent-success);
-  font-weight: var(--font-weight-bold);
+  color: var(--color-state-success);
+  font-weight: map.get($font-weight-scale, bold);
 }
 
 .rating-badge {
   border: 1px solid var(--color-text-muted);
-  padding: 0 var(--space-1);
-  font-size: var(--font-size-xs);
+  padding: 0 map.get($space-scale, xs);
+  font-size: map.get($font-size-scale, 0);
 }
 
 .tech-badges {
   display: flex;
-  gap: var(--space-2);
+  gap: map.get($space-scale, xs);
 }
 
 .tech-badge {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 2px 6px;
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-primary);
+  border-radius: var(--radius-sm, 0.375rem);
+  font-size: map.get($font-size-scale, 0);
+  color: var(--color-text-main);
 }
 
 .hero-description {
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-loose);
-  color: var(--color-text-primary);
+  font-size: map.get($font-size-scale, 1);
+  line-height: map.get($line-height-scale, relaxed);
+  color: var(--color-text-main);
   text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-2);
+  flex-wrap: wrap;
+  gap: map.get($space-scale, sm);
+  margin-top: map.get($space-scale, xs);
 }
 
 .action-btn {
-  font-weight: var(--font-weight-bold);
+  font-weight: map.get($font-weight-scale, bold);
   min-width: 140px;
 }
 
 .icon {
-  margin-right: var(--space-2);
+  margin-right: map.get($space-scale, xs);
 }
 
 .hero-cast {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
+  font-size: map.get($font-size-scale, 0);
+  color: var(--color-text-subtle);
   
   .label {
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
   }
 }
 
 /* --- Controls --- */
 .mute-toggle {
-  width: 40px;
-  height: 40px;
+  @include tap-target; /* WCAG touch target size */
   border-radius: 50%;
-  border: 1px solid var(--color-text-muted);
+  border: 1px solid var(--color-text-subtle);
   background: rgba(0,0,0,0.3);
-  color: var(--color-text-primary);
+  color: var(--color-text-main);
   backdrop-filter: blur(4px);
   display: grid;
   place-items: center;
   cursor: pointer;
+  transition: all 0.2s ease;
   
   &:hover {
     background: rgba(255,255,255,0.1);
-    border-color: var(--color-text-primary);
+    border-color: var(--color-text-main);
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width, 2px) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset, 2px);
   }
 }
 
 .maturity-rating {
-  margin-top: var(--space-2);
+  margin-top: map.get($space-scale, sm);
   background: rgba(0,0,0,0.6);
-  border-left: 3px solid var(--color-text-secondary);
-  padding: var(--space-1) var(--space-3);
-  font-size: var(--font-size-xs);
+  border-left: 3px solid var(--color-text-muted);
+  padding: map.get($space-scale, xs) map.get($space-scale, sm);
+  font-size: map.get($font-size-scale, 0);
   text-transform: uppercase;
 }
 
 /* --- Page Layout --- */
 .carousel-section {
-  margin-top: var(--space-7);
+  margin-top: map.get($space-scale, xl);
 }
 
 .section-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--space-4);
-  color: var(--color-text-primary);
+  font-size: map.get($font-size-scale, 3);
+  font-weight: map.get($font-weight-scale, semibold);
+  margin-bottom: map.get($space-scale, md);
+  color: var(--color-text-main);
 }
 
 /* Grid Layout */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-4);
+  gap: map.get($space-scale, md);
 }
 
 @keyframes fade-in-up {

@@ -80,18 +80,21 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+/* ❌ Removed: @use "@/styles" as *; */
 
 .movie-card {
+  display: flex;
   position: relative;
   flex: 0 0 auto;
   width: 100%;
-  border-radius: var(--radius-sm);
-  background-color: var(--color-bg-elevated);
+  border-radius: var(--radius-sm, 0.375rem);
+  background-color: var(--color-surface-raised);
+  
+  /* Converted custom motion tokens to explicit standard easing */
   transition: 
-    transform var(--motion-base) var(--easing-standard),
-    box-shadow var(--motion-base) var(--easing-standard),
-    z-index 0s var(--motion-base); /* Delay z-index reset on mouseleave */
+    transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    z-index 0s 300ms; /* Delay z-index reset on mouseleave */
   
   cursor: pointer;
   outline: none;
@@ -107,8 +110,10 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
   &:hover,
   &:focus-visible {
     transform: scale(1.05);
-    z-index: var(--z-dropdown); /* Lift above siblings */
-    box-shadow: var(--elevation-3);
+    z-index: var(--z-dropdown, 20); /* Lift above siblings */
+    
+    /* Using the new layered shadow system for smoother depth */
+    box-shadow: var(--shadow-elevation-medium);
     transition-delay: 0s; /* Instant lift */
 
     .movie-card__content {
@@ -117,13 +122,13 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
     }
 
     .movie-card__overlay {
-      opacity: 0.4;
+      opacity: 0.8; /* Darkened slightly to make text pop more */
     }
   }
 
   &:focus-visible {
-    outline: var(--focus-ring-width) solid var(--color-focus-ring);
-    outline-offset: var(--focus-ring-offset);
+    outline: var(--focus-ring-width, 2px) solid var(--color-focus-ring);
+    outline-offset: var(--focus-ring-offset, 2px);
   }
 }
 
@@ -145,11 +150,11 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
   inset: 0;
   background: linear-gradient(
     to top, 
-    var(--color-bg-root) 0%, 
+    var(--color-surface) 0%, 
     transparent 100%
   );
   opacity: 0;
-  transition: opacity var(--motion-base);
+  transition: opacity 300ms ease;
 }
 
 /* Hidden content that reveals */
@@ -157,40 +162,40 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
   position: absolute;
   inset-inline: 0;
   bottom: 0;
-  padding: var(--space-3);
+  padding: map.get($space-scale, md);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: map.get($space-scale, sm);
   
   opacity: 0;
-  transform: translateY(var(--space-2));
+  transform: translateY(map.get($space-scale, sm));
   transition: 
-    opacity var(--motion-base) var(--easing-standard),
-    transform var(--motion-base) var(--easing-standard);
+    opacity 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .movie-card__title {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
+  font-size: map.get($font-size-scale, 1);
+  font-weight: map.get($font-weight-scale, bold);
+  color: var(--color-text-main);
   text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 
 .movie-card__meta {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
+  gap: map.get($space-scale, sm);
+  font-size: map.get($font-size-scale, 0);
+  color: var(--color-text-muted);
 }
 
 .match-score {
-  color: var(--color-accent-success);
-  font-weight: var(--font-weight-bold);
+  color: var(--color-state-success);
+  font-weight: map.get($font-weight-scale, bold);
 }
 
 .rating-badge {
-  border: 1px solid var(--color-text-muted);
+  border: 1px solid var(--color-text-subtle);
   padding: 0 4px;
   font-size: 10px;
   line-height: 1.4;
@@ -198,24 +203,24 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
 
 .movie-card__actions {
   display: flex;
-  gap: var(--space-2);
-  margin-top: var(--space-1);
+  gap: map.get($space-scale, sm);
+  margin-top: map.get($space-scale, xs);
 }
 
 /* Override button styles for the mini-card context */
 .mini-btn {
-  padding: var(--space-1) !important;
+  padding: map.get($space-scale, xs) !important;
   min-height: 2rem !important;
   min-width: 2rem !important;
   border-radius: 50% !important;
-  font-size: var(--font-size-xs) !important;
+  font-size: map.get($font-size-scale, 0) !important;
   background-color: rgba(30, 30, 30, 0.8) !important;
   backdrop-filter: blur(4px);
   border: 1px solid var(--color-border-subtle) !important;
 
   &:hover {
-    border-color: var(--color-text-primary) !important;
-    background-color: var(--color-bg-elevated) !important;
+    border-color: var(--color-text-main) !important;
+    background-color: var(--color-surface-raised) !important;
   }
 }
 </style>

@@ -26,12 +26,12 @@ const isDisabled = computed(() => props.disabled || props.loading)
 <template>
   <button
     :type="type"
-    class="ui-button"
-    :class="[`ui-button--${variant}`, `ui-button--${size}`]"
+    class="button"
+    :class="[`button--${variant}`, `ui-button--${size}`]"
     :disabled="isDisabled"
     :aria-busy="loading || undefined"
   >
-    <span class="ui-button__content">
+    <span class="button__content">
       <slot />
     </span>
   </button>
@@ -44,14 +44,14 @@ const isDisabled = computed(() => props.disabled || props.loading)
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: map.get(settings.$space-scale, xs);
-  padding-inline: map.get(settings.$space-scale, md);
-  padding-block: map.get(settings.$space-scale, xs);
+  gap: map.get($space-scale, xs);
+  padding-inline: map.get($space-scale, md);
+  padding-block: map.get($space-scale, xs);
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-border-subtle);
   background-color: var(--color-surface-soft);
   color: var(--color-text-main);
-  font-weight: map.get(settings.$font-weight-scale, medium);
+  font-weight: map.get($font-weight-scale, medium);
   cursor: pointer;
   text-decoration: none;
   transition:
@@ -99,7 +99,7 @@ const isDisabled = computed(() => props.disabled || props.loading)
 
   .front {
     display: block;
-    padding: map.get(settings.$space-scale, xs) map.get(settings.$space-scale, md);
+    padding: map.get($space-scale, xs) map.get($space-scale, md);
     border-radius: 999px;
     background-color: var(--_btn-color);
     color: var(--_btn-text);
