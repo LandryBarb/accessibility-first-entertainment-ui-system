@@ -46,7 +46,7 @@ const isDisabled = computed(() => props.disabled || props.loading)
   justify-content: center;
   gap: map.get($space-scale, xs);
   padding-inline: map.get($space-scale, md);
-  padding-block: map.get($space-scale, xs);
+  padding-block: map.get($space-scale, sm);
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-border-subtle);
   background-color: var(--color-surface-soft);
@@ -91,6 +91,35 @@ const isDisabled = computed(() => props.disabled || props.loading)
       background-color: var(--color-state-danger-soft);
   }
 }
+.button--tertiary{
+  background-color: var(--color-state-success);
+  color: var(--color-text-main);
+  &:hover {
+      background-color: var(--color-state-success-soft);
+  }
+
+}
+
+
+.ui-button--sm{
+ padding-inline: map.get($space-scale, md);
+  padding-block: map.get($space-scale, sm);
+  font-size: map.get($font-size-scale, 1);
+
+}
+.ui-button--md{
+ padding-inline: map.get($space-scale, lg);
+  padding-block: map.get($space-scale, md);
+  font-size: map.get($font-size-scale, 2);
+
+}
+.ui-button--lg{
+ padding-inline: map.get($space-scale, '2xl');
+  padding-block: map.get($space-scale, md);
+  font-size: map.get($font-size-scale, 2);
+}
+
+
 
 //3D Button Style
 .button--3d {

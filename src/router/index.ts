@@ -11,6 +11,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/system/ButtonPage.vue"),
     meta: { view: "system" },
   },
+    {
+    path: "/system/components/iconButton",
+    name: "system-icon-button",
+    component: () => import("@/pages/system/IconButtonPage.vue"),
+    meta: { view: "system" },
+  },
   {
     path: "/system/components/tabs",
     name: "system-tabs",

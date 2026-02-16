@@ -150,8 +150,8 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to top, 
-    var(--color-surface) 0%, 
+    to bottom, 
+    var(--color-surface) 50%, 
     transparent 100%
   );
   opacity: 0;
@@ -183,6 +183,7 @@ const isPortrait = computed(() => props.aspectRatio === 'portrait');
   /* ✅ TEXT CLAMP: Prevents long titles from blowing out the height */
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
