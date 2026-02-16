@@ -36,4 +36,3 @@ const computedSize = computed(() => {
   flex-shrink: 0;
 }
 </style>
-

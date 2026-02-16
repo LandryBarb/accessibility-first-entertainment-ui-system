@@ -1,28 +1,32 @@
-<script setup >
+<script setup lang="ts" >
+import { computed } from 'vue';
 
+type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'destructive'
+type ButtonSize = 'sm' | 'md' | 'lg'
 
-defineProps({
-    label:{
-        type:String,
-        required: true,
-    },
-    variant: {
-        type: String,
-        default: 'default',
-        validator: (value) =>['primary', 'default', 'small'].includes(value)
-    },
-    disabled:{
-        type:Boolean,
-        default: false
-    }
+const props = withDefaults(defineProps<{
+    label: string,
+    variant?: ButtonVariant,
+    size?: ButtonSize,
+    disabled?: boolean,
+    type?: 'button' | 'submit' | 'reset';
+}>(),{
+    variant: 'secondary',
+    size: 'md',
+    disabled: false,
+    type: 'button'
 });
-defineEmits(['click'])
+
+defineEmits(['click']);
+
+const isDisabled = computed(()=> props.disabled);
 </script>
 
 <template>
     <button
-    type="button"
-    :class="['icon-btn', `icon-btn--${variant}`]"
+    :type="type"
+    class="icon-button"
+    :class="[`icon-button--${variant}`, `icon-button--${size}`]"
     :aria-label="label"
     :disabled="disabled"
     @click="$emit('click')"
@@ -31,58 +35,90 @@ defineEmits(['click'])
     </button>
 </template>
 
-<style scoped lang="css">
-/* Same CSS as vanilla quest-5.html */
-.icon-btn {
-  width: 48px;
-  height: 48px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+<style scoped lang="scss">
+.icon-button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    text-decoration: none;
+
+    transition: 
+    background-color 150ms ease,
+    color 150ms ease,
+    transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    /* Hover lift effect */
+    &:hover:not(:disabled){
+        transform: scale(1.05)
+    }
+    &:active:not(:disabled){
+        transform: scale(0.95)
+    }
+}
+/* --- Sizes (Ensuring WCAG 44px minimum!) --- */
+.icon-button--sm{
+    @include tap-target;
+    padding: map.get($space-scale, sm);
 }
 
-.icon-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
+.icon-button--md{
+    width: 3rem;
+    height: 3rem;
 }
 
-.icon-btn:focus {
-  outline: 3px solid #fff;
-  outline-offset: 2px;
+.icon-button--lg{
+    width: 4rem;
+    height: 4rem;
 }
 
-.icon-btn:active:not(:disabled) {
-  transform: scale(0.95);
+/* --- Variants (Mapped to Semantic Tokens) --- */
+.icon-button--primary{
+    background-color: var(--color-brand-primary);
+    color: var(--color-text-on-brand);
+
+    &:hover:not(:disabled){
+        background-color: var(--color-brand-primary-strong);
+    }
 }
 
-.icon-btn--primary {
-  width: 64px;
-  height: 64px;
-  background: #e50914;
-  font-size: 1.5rem;
+.icon-button--secondary {
+  background-color: var(--color-surface-soft);
+  color: var(--color-text-main);
+  border-color: var(--color-border-subtle);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-surface-raised);
+  }
 }
 
-.icon-btn--primary:hover:not(:disabled) {
-  background: #f40612;
-  transform: scale(1.15);
+.icon-button--tertiary {
+  background-color: transparent;
+  color: var(--color-text-main);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-surface-soft);
+  }
 }
 
-.icon-btn--small {
-  width: 36px;
-  height: 36px;
-  font-size: 1rem;
+.icon-button--destructive {
+  background-color: var(--color-state-danger-soft);
+  color: var(--color-state-danger);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-state-danger);
+    color: var(--color-text-on-brand);
+  }
+
 }
 
-.icon-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  transform: none !important;
+.icon-button:disabled{
+opacity: .5;
+cursor: not-allowed;
 }
+
+
 </style>

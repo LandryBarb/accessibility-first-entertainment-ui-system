@@ -29,6 +29,11 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
               Buttons
             </RouterLink>
           </li>
+          <li>
+            <RouterLink to="/system/components/iconButton" class="nav-item">
+              Icon Buttons
+            </RouterLink>
+          </li>
           <li><a href="#" class="nav-item">Inputs</a></li>
           <li>
             <RouterLink to="/system/components/tabs" class="nav-item">
@@ -87,7 +92,7 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
 </template>
 
 <style scoped lang="scss">
-@use "@/styles" as *;
+// @use "@/styles" as *;
 /* Branding Context (Sidebar) */
 .brand-context {
   display: flex;
