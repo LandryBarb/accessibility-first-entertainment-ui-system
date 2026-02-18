@@ -5,6 +5,10 @@ import ContentDetailLayout from "@/components/layout/ContentDetailLayout.vue";
 import BaseButton from "@/components/atoms/BaseButton.vue";
 import MovieCard from "@/components/patterns/MovieCard.vue";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/molecules/Tabs";
+import IconButton from "@/components/atoms/IconButton.vue";
+import Icon from "@/components/atoms/Icon.vue";
+import { PlayIcon, StepForward, Pause, Settings, Volume2, Trash2, VolumeIcon, WifiOff, Info } from 'lucide-vue-next';
+
 
 // --- Mock Data ---
 
@@ -73,9 +77,12 @@ const isMuted = ref(true);
             <BaseButton variant="tertiary" size="md" class="icon-btn" aria-label="Like">
               👍
             </BaseButton>
-            <BaseButton variant="tertiary" size="md" class="icon-btn" aria-label="More Info">
-              ℹ️
-            </BaseButton>
+            
+            <IconButton
+            variant="secondary"
+            size="md" label="More Info">
+          <Icon :icon="Info" size="md"/>
+          </IconButton>
           </div>
 
           <div class="hero-cast">
