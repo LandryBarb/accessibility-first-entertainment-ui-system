@@ -1,10 +1,32 @@
 <script setup lang="ts">
-import SystemLayout from "@/components/layout/SystemLayout.vue";
-import BaseButton from "@/components/atoms/BaseButton.vue";
+ import SystemLayout from '@/components/layout/SystemLayout.vue';
+import Icon from '@/components/atoms/Icon.vue';
+import IconButton from '@/components/atoms/IconButton.vue';
+import TextInput from '@/components/atoms/TextInput.vue';
+import { CheckCircle } from 'lucide-vue-next';
+import { ref } from 'vue';
+import BaseButton from '@/components/atoms/BaseButton.vue';
+
+
+const email =  ref('');
+const name = ref('');
+
+// Template ref to access component methods
+const emailInputRef = ref<InstanceType<typeof TextInput>>();
+
+function validateEmail(){
+    if(!email.value.includes('@')){
+        //Call the exposed method!
+        emailInputRef.value?.showError('Please enter a valid email address');
+    } else{
+        emailInputRef.value?.clearError();
+    }
+}
 </script>
 
 <template>
-  <SystemLayout>
+
+     <SystemLayout>
     <template #sidebar-header>
       <div class="brand-context">
         <span class="brand-subtitle">Design System</span>
@@ -34,19 +56,15 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
               Icon Buttons
             </RouterLink>
           </li>
-          <li>
-             <RouterLink to="/system/components/input" class="nav-item">
-              Inputs
-            </RouterLink>
-          </li>
+          <li><a href="#" class="nav-item">Inputs</a></li>
           <li>
             <RouterLink to="/system/components/tabs" class="nav-item">
               Tabs
             </RouterLink>
           </li>
-           <li>
-            <RouterLink to="/system/components/toggle" class="nav-item">
-              Toggle
+            <li>
+            <RouterLink to="/system/components/input" class="nav-item">
+              Inputs
             </RouterLink>
           </li>
           <li><a href="#" class="nav-item">Modals</a></li>
@@ -57,7 +75,7 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
 
     <section class="system-page">
       <header class="system-page__header">
-        <h1>Button</h1>
+        <h1>Icon Button</h1>
         <p class="system-page__description">
           A fundamental interactive element used to trigger actions or navigate users.
           Buttons communicate call-to-actions clearly through established visual hierarchy.
@@ -65,39 +83,37 @@ import BaseButton from "@/components/atoms/BaseButton.vue";
       </header>
 
       <hr class="system-page__divider" />
-
-      <section class="system-page__section">
+       <section class="system-page__section">
         <h2>Variants</h2>
         <p>Use variants to establish importance within a view.</p>
         <div class="example-surface">
-          <BaseButton variant="primary">Primary</BaseButton>
-          <BaseButton variant="secondary">Secondary</BaseButton>
-          <BaseButton variant="tertiary">Tertiary</BaseButton>
-          <BaseButton variant="destructive">Destructive</BaseButton>
-        </div>
-      </section>
+    
+         <!-- ref="emailInputRef" gives us access to exposed methods -->
+          <TextInput
+            ref="emailInputRef"
+            v-model="email"
+            label="Email"
+            type="email"
+            :required="true"
+            hint="We'll never share your email"
+          />
 
-      <section class="system-page__section">
-        <h2>Sizes</h2>
-        <p>Available in three fixed heights to accommodate information density.</p>
-        <div class="example-surface">
-          <BaseButton size="sm">Small</BaseButton>
-          <BaseButton size="md">Medium</BaseButton>
-          <BaseButton size="lg">Large</BaseButton>
-        </div>
-      </section>
+            <TextInput
+            ref="emailInputRef"
+            v-model="name"
+            label="Firstname"
+            type="name"
+            :required="true"
+            hint="enter your email"
+          />
 
-      <section class="system-page__section">
-        <h2>States</h2>
-        <p>Visual feedback for interaction and processing states.</p>
-        <div class="example-surface">
-          <BaseButton variant="secondary">Default</BaseButton>
-          <BaseButton variant="secondary" disabled>Disabled</BaseButton>
-          <BaseButton variant="primary" loading>Loading</BaseButton>
-        </div>
-      </section>
+         
+        
+
+    </div>
     </section>
-  </SystemLayout>
+    </section>
+    </SystemLayout> 
 </template>
 
 <style scoped lang="scss">

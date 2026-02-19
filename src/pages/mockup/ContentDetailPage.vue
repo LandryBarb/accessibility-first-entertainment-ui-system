@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 import MockupLayout from "@/components/layout/MockupLayout.vue";
 import ContentDetailLayout from "@/components/layout/ContentDetailLayout.vue";
 import BaseButton from "@/components/atoms/BaseButton.vue";
@@ -92,6 +94,14 @@ const isMuted = ref(true);
       </template>
 
       <template #hero-controls>
+        <IconButton
+        variant="secondary"
+        label="Playback settings"
+        @click="router.push('/mockup/settings')"
+        style="margin-right:12px;"
+        >
+      <Icon :icon="Settings"/>
+      </IconButton>
         <button 
           class="mute-toggle" 
           @click="isMuted = !isMuted"

@@ -29,6 +29,25 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/pages/mockup/ContentDetailPage.vue"),
     meta: { view: "mockup" },
   },
+  {
+    path: "/system/components/toggle",
+    name: "system-toggle",
+    component: () => import("@/pages/system/TogglePage.vue"),
+    meta: {view: "system"},
+  },
+    {
+    path: "/system/components/input",
+    name: "system-input",
+    component: () => import("@/pages/system/InputsPage.vue"),
+    meta: {view: "system"},
+  },
+  {
+    path: "/mockup/settings",
+    name: "mockup-settings",
+    component: () => import("@/pages/mockup/SettingsPage.vue"), // ✅ New Route
+    meta: { view: "mockup" },
+  }
+ 
 ];
 
 export const router = createRouter({
