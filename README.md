@@ -5,11 +5,11 @@
 
 ![Stream/UI Design System: Button component documentation showing four variant buttons (Primary in blue, Secondary in orange, Tertiary in green, Destructive in red) and three size options (Small, Medium, Large) against a dark interface background](entertaiment-ui-library-cover.png)
 
-## 📖 The "Why" (For Hiring Managers & Decision Makers)
+## 📖 The "Why"
 
 Streaming platforms and entertainment interfaces are highly visual, often relying on complex hover states, cinematic animations, and dense image grids. Unfortunately, these patterns frequently degrade the experience for users relying on screen readers, keyboards, or touch devices.
 
-This project was built to answer a core engineering question: **How do we build a premium, cinematic user experience without sacrificing inclusivity?**
+This project was built to answer a core engineering question: **How do I build a premium, cinematic user experience without sacrificing inclusivity?**
 
 This repository serves as a dual-purpose proof of concept:
 
