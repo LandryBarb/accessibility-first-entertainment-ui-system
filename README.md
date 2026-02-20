@@ -5,7 +5,7 @@
 
 ![Stream/UI Design System: Button component documentation showing four variant buttons (Primary in blue, Secondary in orange, Tertiary in green, Destructive in red) and three size options (Small, Medium, Large) against a dark interface background](entertaiment-ui-library-cover.png)
 
-## 📖 The "Why"
+## 📖 The Purpose of the Project
 
 Streaming platforms and entertainment interfaces are highly visual, often relying on complex hover states, cinematic animations, and dense image grids. Unfortunately, these patterns frequently degrade the experience for users relying on screen readers, keyboards, or touch devices.
 
